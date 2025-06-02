@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HULSAY - Tribal Font Portfolio</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" href="logo.png" />
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="HULSAY Logo" class="logo" />
+    <h1>HULSAY</h1>
+    <p class="subtitle">A Santali Cultural Font Experience</p>
+    <div id="datetime"></div>
+    <div id="google_translate_element"></div>
+  </header>
+
+  <main>
+    <section class="tester">
+      <h2>Font Tester</h2>
+      <textarea id="fontInput" placeholder="Type here in Santali..." oninput="updatePreview()"></textarea>
+      <div id="fontPreview">Preview will appear here...</div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 HULSAY | Preserving Tribal Identity Through Design</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
