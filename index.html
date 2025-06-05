@@ -6,15 +6,17 @@
   <title>hULSAY - Tribal Font Portfolio</title>
   <link rel="stylesheet" href="style.css"/>
   <link rel="icon" href="logo.png" />
-  
+
   <style>
-    /* Nagam font embed */
     @font-face {
       font-family: 'Nagam';
       src: url('fonts/Nagam.woff') format('woff');
     }
 
-    /* Santali day ke liye style */
+    body {
+      transition: all 0.3s ease;
+    }
+
     #santali-day {
       font-family: 'Nagam', sans-serif;
       font-size: 22px;
@@ -22,52 +24,78 @@
       margin-top: 8px;
       font-weight: bold;
     }
+
+    #lang-switcher {
+      margin: 10px 0;
+      padding: 5px 10px;
+      font-size: 16px;
+    }
   </style>
 </head>
 <body>
   <header>
     <img src="logo.png" alt="hULSAY Logo" class="logo" />
-    <h1>hULSAY</h1>
-    <p class="subtitle"> Santali AricHali akHor a.yka.v</p>
+    <h1 id="site-title">hULSAY</h1>
+    <p class="subtitle" id="subtitle">Santali AricHali akHor a.yka.v</p>
     <div id="datetime"></div>
 
     <!-- Santali Day Display -->
-    <p>tehen do : <span id="santali-day"></span></p>
+    <p><span id="day-label">tehen do</span> : <span id="santali-day"></span></p>
 
+    <!-- Language Selector -->
+    <select id="lang-switcher" onchange="changeLanguage(this.value)">
+      <option value="">🌐 Choose Language</option>
+      <option value="en">English</option>
+      <option value="hi">हिन्दी</option>
+      <option value="ol">ᱚᱞ ᱥᱚᱢᱚᱨ (Ol Chiki)</option>
+    </select>
+
+    <!-- Google Translate -->
     <div id="google_translate_element"></div>
   </header>
 
   <main>
     <section class="tester">
-      <h2>akHor Beyhar</h2>
+      <h2 id="font-tester-heading">akHor Beyhar</h2>
       <textarea id="fontInput" placeholder="ol me santali te..." oninput="updatePreview()"></textarea>
       <div id="fontPreview">node ol qelo a...</div>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 hULSAY | Preserving Tribal Identity Through Design</p>
+    <p id="footer-text">© 2025 hULSAY | Preserving Tribal Identity Through Design</p>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Font Preview Script -->
+  <script>
+    function updatePreview() {
+      const input = document.getElementById('fontInput').value;
+      document.getElementById('fontPreview').innerText = input;
+    }
+  </script>
+
+  <!-- Google Translate Script (Hindi + English) -->
   <script type="text/javascript">
-    // Google Translate initialization
     function googleTranslateElementInit() {
-      new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
     }
   </script>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-  <!-- Santali day script -->
+  <!-- Santali Day Script -->
   <script>
     const santaliDays = [
-      "sife maha", // Sunday
-      "ote maha",   // Monday
-      "bale maha", // Tuesday
-      "sa.gun maha", // Wednesday
-      "Sa.rdi maha", // Thursday
-      "ja.rub maha", // Friday
-      "qu.hum maha"  // Saturday
+      "sife maha",     // Sunday
+      "ote maha",      // Monday
+      "bale maha",     // Tuesday
+      "sa.gun maha",   // Wednesday
+      "Sa.rdi maha",   // Thursday
+      "ja.rub maha",   // Friday
+      "qu.hum maha"    // Saturday
     ];
 
     const today = new Date();
@@ -75,5 +103,31 @@
     document.getElementById("santali-day").innerText = santaliDays[dayIndex];
   </script>
 
+  <!-- Manual Language Switch Script -->
+  <script>
+    function changeLanguage(lang) {
+      if (lang === "ol") {
+        document.body.style.fontFamily = "Nagam";
+
+        // Manual translation
+        document.getElementById("site-title").innerText = "ᱦᱩᱞᱥᱟᱭ";
+        document.getElementById("subtitle").innerText = "ᱥᱟᱱᱛᱟᱞᱤ ᱚᱨ ᱚᱞ ᱠᱟᱹᱲᱤ ᱧᱩᱛᱩᱢ";
+        document.getElementById("day-label").innerText = "ᱴᱮᱦᱮᱱ ᱰᱚ";
+        document.getElementById("font-tester-heading").innerText = "ᱟᱠᱷᱚᱨ ᱵᱮᱭᱦᱟᱨ";
+        document.getElementById("footer-text").innerText = "© 2025 ᱦᱩᱞᱥᱟᱭ | ᱴᱟᱞᱟᱝ ᱠᱟᱜ ᱥᱟᱱᱛᱟᱞᱤ ᱧᱩᱛᱩᱢ ᱟᱹᱜ ᱪᱟᱹᱞᱤ";
+        alert("ᱚᱞ ᱥᱚᱢᱚᱨ ᱥᱟᱠᱷᱟᱨ (Ol Chiki script activated)");
+      } else {
+        // Reset to default
+        document.body.style.fontFamily = "";
+
+        // English text restore (optional, you can make it dynamic later)
+        document.getElementById("site-title").innerText = "hULSAY";
+        document.getElementById("subtitle").innerText = "Santali AricHali akHor a.yka.v";
+        document.getElementById("day-label").innerText = "tehen do";
+        document.getElementById("font-tester-heading").innerText = "akHor Beyhar";
+        document.getElementById("footer-text").innerText = "© 2025 hULSAY | Preserving Tribal Identity Through Design";
+      }
+    }
+  </script>
 </body>
 </html>
