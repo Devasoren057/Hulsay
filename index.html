@@ -126,6 +126,29 @@
         document.getElementById("day-label").innerText = "tehen do";
         document.getElementById("font-tester-heading").innerText = "akHor Beyhar";
         document.getElementById("footer-text").innerText = "© 2025 hULSAY | Preserving Tribal Identity Through Design";
+        <!-- Time Script with Ol Chiki Time Format -->
+<script>
+  function updateTime() {
+    const now = new Date();
+    let hours = now.getHours();
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+
+    let timePeriod = hours >= 12 ? "seta bela" : "ayub bela"; // Seta Bela / Ayub Bela
+
+    if (hours > 12) {
+      hours = hours - 12;
+    } else if (hours === 0) {
+      hours = 12;
+    }
+
+    const formattedTime = `${hours}:${minutes} ${timePeriod}`;
+    document.getElementById("datetime").innerText = formattedTime;
+  }
+
+  // Update every second
+  setInterval(updateTime, 1000);
+  updateTime(); // Call once on load
+</script>
       }
     }
   </script>
